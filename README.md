@@ -3,6 +3,8 @@
 ___
 # Readme
 
+This is not an officially supported Google product. This project is not eligible for the [Google Open Source Software Vulnerability Rewards Program](https://bughunters.google.com/open-source-security).
+
 ### What does this Block do for me?
 
 **(1) Understand Overall Application Health** - Use the Application Health dashboard to understand high level metrics that indicate how well the application is performing overall
@@ -11,7 +13,6 @@ ___
 
 **(3) Drill into Details and Plan to Resolve Issues** - Look at the details surrounding a specific issue to determine a course of action for resolving the bug
 
-
 ### Block Info
 
 This block is modeled on the BigQuery Crashlytics Export schema.
@@ -19,7 +20,6 @@ This block is modeled on the BigQuery Crashlytics Export schema.
 - There is one table for each app in your project, unless you've opted out of exporting data for that app
 - Each record represents one error event in your application
 - You can optionally enable streaming, in which case you will have an additional realtime table
-
 
 ### Block Structure
 
@@ -36,7 +36,6 @@ Each field that is an repeated (array) column in BigQuery is represented as its 
 **(3) Issue Facts View**
 
 This view creates a derived table which rollsup statistics for a single issue
-
 
 ### Using the Block for More than One Application or to Differentiate Realtime Data
 
@@ -98,7 +97,6 @@ explore: +crashlytics {
   always_filter: {
     filters: [
       crashlytics.application_filter: "com_google_friendlypix_IOS_REALTIME"
-    ]
   }
 }
 ```
@@ -115,8 +113,6 @@ view: +crashlytics {
 
 6. [Import the dashboards from LookML](https://docs.looker.com/dashboards/lookml-to-user-dashboard) and [add filters onto the dashboards](https://docs.looker.com/dashboards/dashboard-beta-filters) to include require users to select a value for application filter.
 
-
-
 ### Leveraging Custom Variables
 
 You can chose to create custom dimensions that you'd like to appear in the explore with a dimension declaration. For example, if we have brand_id as a breadcrumb parameter, available for events where the user is Viewing an Item then we might create a dimension like this in the breadcrumbs param view:
@@ -127,8 +123,6 @@ dimension:  brand_id {
   sql:case when ${crashlytics__breadcrumbs.name} = 'ViewItem' and ${key} = 'brand_id' then ${value} else null end  ;;
 }
 ```
-
-
 
 ### Incoporating Analytics Data to Calculate % of Crash Free Users / Sessions
 
